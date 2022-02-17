@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useQuery } from "react-query";
 
