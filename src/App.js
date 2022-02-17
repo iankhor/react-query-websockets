@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import useWebSocket, { ReadyState } from 'react-use-websocket';
+import { useQuery } from "react-query";
 
-function App() {
+function App({ queryClient }) {
+  const { lastMessage, readyState } = useWebSocket('ws://localhost:8080');
+  const { data: posts } = useQuery("posts", () => fetch("http://localhost:8080/posts").then((res) => res.json()), { staleTime: Infinity });
+
+  useEffect(() => {
+    if(lastMessage?.data === 'new-data-event') queryClient.invalidateQueries('posts')
+  },[lastMessage])
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: 'Connecting',
+    [ReadyState.OPEN]: 'Open',
+    [ReadyState.CLOSING]: 'Closing',
+    [ReadyState.CLOSED]: 'Closed',
+    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
+  }[readyState];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>The WebSocket is currently {connectionStatus}</div>
+      <hr/>
+      {posts?.length === 0 && "There is no data"}
+      <pre>{JSON.stringify(posts, null, 2) }</pre>
     </div>
   );
 }

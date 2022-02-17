@@ -3,10 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Server } from 'mock-socket';
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
+const mockServer = new Server('ws://localhost:8080');
+
+mockServer.on('connection', socket => {
+  setInterval(() => {
+    console.log('pretend new data event from server')
+    socket.send('new-data-event')
+  }, 3000);
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App queryClient={queryClient} />
+
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
