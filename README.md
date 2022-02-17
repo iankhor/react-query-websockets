@@ -1,4 +1,4 @@
-Using react-query to invalidate a query when there is new data events via websockets
+Using react-query to invalidate a query when there are new data events via websockets
 
 To begin
 
