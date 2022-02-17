@@ -14,8 +14,8 @@
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" \"yarn server\"",
-    "clean": "node append clean",
-    "append": "node append",
+    "clean": "node persist clean",
+    "persist": "node persist",
     "server": "json-server --watch db.json --port 8080",
     "build": "react-scripts build",
     "eject": "react-scripts eject"

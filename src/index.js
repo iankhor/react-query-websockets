@@ -9,7 +9,7 @@ const mockServer = new Server('ws://localhost:8080');
 
 mockServer.on('connection', socket => {
   setInterval(() => {
-    console.log('pretend new data event from server')
+    // console.log('pretend new data event from server')
     socket.send('new-data-event')
   }, 3000);
 });

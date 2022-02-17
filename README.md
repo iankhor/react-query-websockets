@@ -9,5 +9,7 @@ To begin
 
 1. `yarn install`
 2. `yarn start`
-3. To simulate new data run `yarn append` as many times as you want. Observe new data appear on the UI
-4. To clean data run `yarn clean`. Observe data in UI. Repeat Step 3.
+3. Populate first data, run `yarn persist`. Run it again to append more data.
+4. To see an existing data being updated. Run `yarn persist progress-init` and then run `yarn persist progress`.
+You will see the progress attribute being updated in the UI.
+5. Observe ability for data to be updated in the background while filtering data
