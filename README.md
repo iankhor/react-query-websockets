@@ -1,3 +1,8 @@
+## Demo
+
+![](/docs/demo.gif)
+
+## Instructions
 Using react-query to invalidate a query when there are new data events via websockets
 
 To begin
